@@ -34,7 +34,7 @@ export const singleCardRequest = () => ({
 });
 
 // Fetching cards
-export const fetchCards = (searchPhrase) => {
+export const fetchSearch = (searchPhrase) => {
   // dispatch is provided by Thunk middleware
   return async (dispatch) => {
     // executes the action
