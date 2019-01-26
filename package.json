@@ -20,6 +20,7 @@
   "homepage": "https://github.com/wiiitek/dev-college-01#readme",
   "dependencies": {
     "next": "^7.0.2",
+    "node-fetch": "^2.3.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "semantic-ui-react": "^0.84.0"

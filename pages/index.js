@@ -56,6 +56,7 @@ export default class Home extends React.Component {
           <Container>
             <Header
               content="DevCollege card search!"
+              icon="eye"
             >
             </Header>
             <Form>
