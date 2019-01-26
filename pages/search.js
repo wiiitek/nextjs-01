@@ -2,6 +2,8 @@ import React from 'react';
 
 import fetch from 'node-fetch';
 
+import Link from 'next/link';
+
 import {
   Table, TableBody, TableRow
 } from 'semantic-ui-react';
@@ -26,7 +28,12 @@ export default class Search extends React.Component {
       this.props.data.map(card => (
         // key helps react to update only the single item when it changes
         <Table.Row key={card.id}>
-          <Table.Cell>{card.name}</Table.Cell>
+          <Table.Cell>
+            <Link
+              href={{ pathname: '/card', query: { id: card.id } }}>
+              <a>{card.name}</a>
+            </Link>
+          </Table.Cell>
           <Table.Cell>{card.set_name}</Table.Cell>
           <Table.Cell>{card.mana_cost}</Table.Cell>
           <Table.Cell>{card.eur ? `${card.eur} €` : 'N/A'}</Table.Cell>
