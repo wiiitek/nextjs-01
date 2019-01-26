@@ -1,0 +1,27 @@
+{
+  "name": "dev-college-01",
+  "version": "0.1.0",
+  "description": "Dev College workshops at Merixstudio",
+  "main": "pages/index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wiiitek/dev-college-01.git"
+  },
+  "author": "",
+  "license": "BY-NC",
+  "bugs": {
+    "url": "https://github.com/wiiitek/dev-college-01/issues"
+  },
+  "homepage": "https://github.com/wiiitek/dev-college-01#readme",
+  "dependencies": {
+    "next": "^7.0.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "semantic-ui-react": "^0.84.0"
+  }
+}
