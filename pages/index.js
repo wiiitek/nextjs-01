@@ -11,6 +11,26 @@ import {
 } from 'semantic-ui-react';
 
 export default class Home extends React.Component {
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      searchPhrase: 'test',
+    }
+
+    // another way of binding context
+    // compare different way of declaring methods, i.e.: getName = () = {}...
+    // which is called "fat arrow" declaration
+    this.handleSearchPhraseChange = this.handleSearchPhraseChange.bind(this);
+  }
+
+  handleSearchPhraseChange (event) {
+    this.setState({
+      searchPhrase: event.target.value,
+    })
+  }
+
   render () {
     return (
       <Layout>
@@ -32,6 +52,8 @@ export default class Home extends React.Component {
                 <input
                   type="text"
                   placeholder="Type search phrase"
+                  value={this.state.searchPhrase}
+                  onChange={this.handleSearchPhraseChange}
                 />
               </Form.Field>
               <Button>
