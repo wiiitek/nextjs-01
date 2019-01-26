@@ -10,7 +10,7 @@ import {
   TableRow
 } from 'semantic-ui-react';
 
-import { fetchCards } from '../app/actions/cards';
+import { fetchSearch } from '../app/actions/cards';
 
 import Layout from '../app/Layout';
 
@@ -23,7 +23,7 @@ class Search extends React.Component {
     const searchPhrase = query.q;
     // we are using Thunk to pass function instead of action
     // this is done so that we wait until the data are retrieved
-    await store.dispatch(fetchCards(searchPhrase));
+    await store.dispatch(fetchSearch(searchPhrase));
     return {};
   }
 

@@ -29,6 +29,26 @@ function cards (state = initialState, action) {
         isFetchingSearch: false,
       }
     }
+    case cardActionTypes.SINGLE_CARD_REQUEST: {
+      // ... means that we are mergin objects
+      return {
+        ...state,
+        isFetchingSearch: true,
+      }
+    }
+    case cardActionTypes.SINGLE_CARD_SUCCESS: {
+      return {
+        ...state,
+        details: action.result,
+        isFetchingSearch: false,
+      }
+    }
+    case cardActionTypes.SINGLE_CARD_ERROR: {
+      return {
+        ...state,
+        isFetchingSearch: false,
+      }
+    }
     default:
       return state;
   }

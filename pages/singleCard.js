@@ -1,6 +1,6 @@
 import React from 'react';
 
-import fetch from 'node-fetch';
+import { connect } from 'react-redux';
 
 import {
   Card,
@@ -9,22 +9,20 @@ import {
   Container
 } from 'semantic-ui-react';
 
+import { fetchSingleCard } from '../app/actions/cards';
+
 import Layout from '../app/Layout';
 
-export default class SingleCard extends React.Component {
+class SingleCard extends React.Component {
 
-  static async getInitialProps ({ query }) {
+  static async getInitialProps ({ store, query }) {
     const cardId = query.id;
-    const res = await fetch(`https://api.scryfall.com/cards/${cardId}`);
-    const statusCode = res.status;
-    const data = await res.json();
-    return { data, statusCode };
+    await store.dispatch(fetchSingleCard(cardId));
+    return {};
   }
 
   render () {
-    const card = this.props.statusCode === 200 ?
-      this.props.data
-      : {};
+    const card = this.props.data;
     return (
       <Layout>
         <Card
@@ -64,3 +62,19 @@ export default class SingleCard extends React.Component {
     );
   }
 }
+
+// mapper to get only part of the state for our component
+const mapStateToProps = (state) => {
+  return ({
+    data: state.cards.details,
+  })
+};
+
+
+// connecting our component to redux...
+// connect() returns a function, and then we execute it again
+// so it is like:
+// const fun = connect(mapStateToProps);
+// export default fun(SingleCard)
+export default connect(mapStateToProps)(SingleCard);
+

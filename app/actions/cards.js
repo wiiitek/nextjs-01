@@ -10,10 +10,11 @@ export const cardActionTypes = {
   SEARCH_SUCCESS: `${prefix} Search Success`,
   SEARCH_ERROR: `${prefix} Search Error`,
   SINGLE_CARD_REQUEST: `${prefix} Single Card Request`,
+  SINGLE_CARD_SUCCESS: `${prefix} Single Card Success`,
+  SINGLE_CARD_ERROR: `${prefix} Single Card Error`,
   // ...
 };
 
-// Actions
 export const searchRequest = () => ({
   type: cardActionTypes.SEARCH_REQUEST,
 });
@@ -29,10 +30,6 @@ export const searchError = () => ({
   type: cardActionTypes.SEARCH_ERROR,
 });
 
-export const singleCardRequest = () => ({
-  type: cardActionTypes.SINGLE_CARD_REQUEST,
-});
-
 // Fetching cards
 export const fetchSearch = (searchPhrase) => {
   // dispatch is provided by Thunk middleware
@@ -46,4 +43,32 @@ export const fetchSearch = (searchPhrase) => {
       searchSuccess(data || [])
     );
   };
+}
+
+export const singleCardRequest = () => ({
+  type: cardActionTypes.SINGLE_CARD_REQUEST,
+});
+
+export const singleCardSuccess = (result) => ({
+  type: cardActionTypes.SINGLE_CARD_SUCCESS,
+  // new syntax suger - instead of writing:
+  // "result": result
+  result,
+});
+
+export const singleCardError = () => ({
+  type: cardActionTypes.SINGLE_CARD_ERROR,
+});
+
+// Fetching single card
+export const fetchSingleCard = (cardId) => {
+  return async (dispatch) => {
+    dispatch(singleCardRequest)
+    const res = await fetch(`https://api.scryfall.com/cards/${cardId}`);
+    //const statusCode = res.status;
+    const data = await res.json();
+    return dispatch(
+      singleCardSuccess(data || {})
+    );
+  }
 }
