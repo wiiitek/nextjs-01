@@ -5,7 +5,9 @@ import fetch from 'node-fetch';
 import Link from 'next/link';
 
 import {
-  Table, TableBody, TableRow
+  Table,
+  TableBody,
+  TableRow
 } from 'semantic-ui-react';
 
 import Layout from '../app/Layout';
@@ -30,7 +32,7 @@ export default class Search extends React.Component {
         <Table.Row key={card.id}>
           <Table.Cell>
             <Link
-              href={{ pathname: '/card', query: { id: card.id } }}>
+              href={{ pathname: '/singleCard', query: { id: card.id } }}>
               <a>{card.name}</a>
             </Link>
           </Table.Cell>
