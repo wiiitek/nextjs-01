@@ -9,7 +9,12 @@ import {
   Container
 } from 'semantic-ui-react';
 
-import { fetchSingleCard } from '../app/actions/cards';
+import Link from 'next/link';
+
+import {
+  fetchSingleCard,
+  fetchRandomCard
+} from '../app/actions/cards';
 
 import Layout from '../app/Layout';
 
@@ -17,7 +22,13 @@ class SingleCard extends React.Component {
 
   static async getInitialProps ({ store, query }) {
     const cardId = query.id;
-    await store.dispatch(fetchSingleCard(cardId));
+
+    if (cardId === 'random') {
+      await store.dispatch(fetchRandomCard());
+    } else {
+      await store.dispatch(fetchSingleCard(cardId));
+    }
+
     return {};
   }
 
@@ -36,6 +47,15 @@ class SingleCard extends React.Component {
           <Card.Content>
             <Card.Header>
               {card.name}
+              <Link
+                href={{ pathname: '/singleCard', query: { id: card.id } }}>
+                <a>
+                  <Icon
+                    name="linkify"
+                    className="right"
+                  />
+                </a>
+              </Link>
             </Card.Header>
             <Card.Meta>
               <Icon

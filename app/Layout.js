@@ -2,6 +2,8 @@ import React from 'react';
 
 import Head from 'next/head';
 
+import Link from 'next/link';
+
 // round brackets (instead of '{') mean that we want just to return the value
 const Layout = ({ children }) => (
 
@@ -20,6 +22,10 @@ const Layout = ({ children }) => (
         margin: '0 auto',
         marginTop: '30px'
       }}>
+      <Link
+        href={{ pathname: '/' }}>
+        <a>Dev College 01</a>
+      </Link>
       {children}
     </div>
   </div>

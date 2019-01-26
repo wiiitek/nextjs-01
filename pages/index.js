@@ -43,13 +43,20 @@ export default class Home extends React.Component {
     });
   }
 
+  redirectToRandomCard () {
+    Router.push({
+      pathname: '/singleCard',
+      query: { id: 'random' }
+    });
+  }
+
   render () {
     return (
       <Layout>
         <Segment
           textAlign="center"
           style={{
-            minHeight: '80vh', paddingTop: '50px'
+            padding: '50px'
           }}
           vertical
         >
@@ -72,9 +79,19 @@ export default class Home extends React.Component {
               <Button
                 onClick={this.redirectToSearchPage}
               >
-                Submit
+                Search
                 <Icon
-                  name="right arrow"
+                  name="arrow right"
+                  className="right"
+                />
+              </Button>
+              <Button
+                onClick={this.redirectToRandomCard}
+              >
+                Random
+                <Icon
+                  name="random"
+                  className="right"
                 />
               </Button>
             </Form>
