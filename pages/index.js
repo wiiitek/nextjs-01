@@ -19,7 +19,7 @@ export default class Home extends React.Component {
     super(props)
 
     this.state = {
-      searchPhrase: '',
+      searchPhrase: 'elf',
     }
 
     // another way of binding context

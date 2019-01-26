@@ -1,6 +1,6 @@
 import React from 'react';
 
-import fetch from 'node-fetch';
+import { connect } from 'react-redux';
 
 import Link from 'next/link';
 
@@ -10,38 +10,38 @@ import {
   TableRow
 } from 'semantic-ui-react';
 
+import { fetchCards } from '../app/actions/cards';
+
 import Layout from '../app/Layout';
 
-export default class Search extends React.Component {
+class Search extends React.Component {
 
   // must be a static method because will be used before constructor
   // async function is a wrapper around promises
   //static async getInitialProps (ctx) {
-  static async getInitialProps ({ query }) {
+  static async getInitialProps ({ store, query }) {
     const searchPhrase = query.q;
-    const res = await fetch(`https://api.scryfall.com/cards/search?q=${searchPhrase}`);
-    const statusCode = res.status;
-    const { data } = await res.json();
-    return { data, statusCode };
+    // we are using Thunk to pass function instead of action
+    // this is done so that we wait until the data are retrieved
+    await store.dispatch(fetchCards(searchPhrase));
+    return {};
   }
 
   render () {
-    const rows = this.props.statusCode === 200 ?
-      this.props.data.map(card => (
-        // key helps react to update only the single item when it changes
-        <Table.Row key={card.id}>
-          <Table.Cell>
-            <Link
-              href={{ pathname: '/singleCard', query: { id: card.id } }}>
-              <a>{card.name}</a>
-            </Link>
-          </Table.Cell>
-          <Table.Cell>{card.set_name}</Table.Cell>
-          <Table.Cell>{card.mana_cost}</Table.Cell>
-          <Table.Cell>{card.eur ? `${card.eur} €` : 'N/A'}</Table.Cell>
-        </Table.Row>
-      ))
-      : [];
+    const rows = this.props.data.map(card => (
+      // key helps react to update only the single item when it changes
+      <Table.Row key={card.id}>
+        <Table.Cell>
+          <Link
+            href={{ pathname: '/singleCard', query: { id: card.id } }}>
+            <a>{card.name}</a>
+          </Link>
+        </Table.Cell>
+        <Table.Cell>{card.set_name}</Table.Cell>
+        <Table.Cell>{card.mana_cost}</Table.Cell>
+        <Table.Cell>{card.eur ? `${card.eur} €` : 'N/A'}</Table.Cell>
+      </Table.Row>
+    ));
 
     return (
       <Layout>
@@ -64,3 +64,17 @@ export default class Search extends React.Component {
     )
   }
 }
+
+// mapper to get only part of the state for our component
+const mapStateToProps = (state) => {
+  return ({
+    data: state.cards.results,
+  })
+};
+
+// connecting our component to redux...
+// connect() returns a function, and then we execute it again
+// so it is like:
+// const fun = connect(mapStateToProps);
+// export default fun(Search)
+export default connect(mapStateToProps)(Search);
