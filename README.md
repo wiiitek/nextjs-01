@@ -3,7 +3,7 @@ dev-college-01
 
 [Dev College workshops] at [Merixstudio] (2019-01-26).
 
-Using:
+The project is using:
 
 * [Semantic UI React]
 * [Next JS]
@@ -13,6 +13,12 @@ See Also:
 * [Getting Started with Next.js in 5 Minutes]
 * [Getting started with Next.js]
 
+Running locally
+---------------
+
+```bash
+npm run dev
+```
 
 
 

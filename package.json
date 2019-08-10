@@ -13,13 +13,14 @@
     "url": "git+https://github.com/wiiitek/dev-college-01.git"
   },
   "author": "",
-  "license": "BY-NC",
+  "license": "CC-BY-NC-4.0",
   "bugs": {
     "url": "https://github.com/wiiitek/dev-college-01/issues"
   },
   "homepage": "https://github.com/wiiitek/dev-college-01#readme",
   "dependencies": {
-    "next": "^7.0.2",
+    "lodash": "^4.17.15",
+    "next": "^9.0.3",
     "next-redux-wrapper": "^2.1.0",
     "node-fetch": "^2.3.0",
     "react": "^16.7.0",
