@@ -20,7 +20,7 @@
   "homepage": "https://github.com/wiiitek/dev-college-01#readme",
   "dependencies": {
     "lodash": "^4.17.15",
-    "next": "^9.0.3",
+    "next": "^9.3.2",
     "next-redux-wrapper": "^2.1.0",
     "node-fetch": "^2.3.0",
     "react": "^16.7.0",
